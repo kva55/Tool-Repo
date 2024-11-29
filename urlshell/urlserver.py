@@ -50,6 +50,7 @@ def accept_input():
 
 if __name__ == '__main__':
     # Start the input thread
+    app.run(debug=False, port=80)
     input_thread = threading.Thread(target=accept_input)
     input_thread.daemon = True
     input_thread.start()
