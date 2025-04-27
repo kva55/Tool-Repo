@@ -18,7 +18,7 @@ URLS_PRIVESC=(
     "https://github.com/ParrotSec/mimikatz/blob/master/x64/mimikatz.exe"
 )
 
-# === Tools Section ===
+# === enum ===
 FOLDER_ENUM="enumeration"
 URLS_ENUM=(
     "https://githubusercontent.com/PowerShellMafia/PowerSploit/refs/heads/master/Recon/PowerView.ps1"
@@ -30,7 +30,7 @@ URLS_ENUM=(
 
 )
 
-# === Tools Section ===
+# === shells ===
 FOLDER_SHELLS="shells"
 URLS_SHELLS=(
    "https://raw.githubusercontent.com/besimorhino/powercat/refs/heads/master/powercat.ps1"
@@ -55,15 +55,15 @@ function download_section() {
 
 # --- Execute each section ---
 
-# Github Scripts
+# tunnels
 
 download_section "$FOLDER_TUNNEL" "${URLS_TUNNEL[@]}"
 
-# Personal Projects
+# privesc
 
 download_section "$FOLDER_PRIVESC" "${URLS_PRIVESC[@]}"
 
-# Tools
+# enum
 
 download_section "$FOLDER_ENUM" "${URLS_ENUM[@]}"
 
