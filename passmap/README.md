@@ -14,4 +14,4 @@ options:
 ```
 
 ## Quick start
-``sudo python3 passmap.p -i <interface> -f ":192",":10.",``
+``sudo python3 passmap.p -i <interface> -f ":192",":10."``
