@@ -563,7 +563,15 @@ exit 0";
             {
                 string rel = RelFromCallback(ci);
                 remote = rel == null ? null : RemoteFromRel(rel);
-                if (remote == null) throw new IOException("cannot map callback path");
+                if (remote == null)
+                {
+                    // Fall back to the remote path we stored in the placeholder when we created it.
+                    string id = ci.FileIdentity != IntPtr.Zero && ci.FileIdentityLength > 0
+                        ? Marshal.PtrToStringUni(ci.FileIdentity, (int)(ci.FileIdentityLength / 2)) : null;
+                    if (id != null && id.StartsWith("/") && !id.Contains("/../") && !id.EndsWith("/..")) remote = id;
+                }
+                if (remote == null)
+                    throw new IOException("cannot map callback path '" + (ci.NormalizedPath != IntPtr.Zero ? Marshal.PtrToStringUni(ci.NormalizedPath) : "(null)") + "' (root volume path '" + RootVol + "')");
                 Log("download  " + remote + "  (" + ci.FileSize + " bytes)");
                 error = Download(remote, ci.FileSize, delegate(byte[] data, int count, long offset)
                 {
